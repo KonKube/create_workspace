@@ -81,6 +81,11 @@ chmod +x ./kubectx/kube*
 mv ./kubectx/kube* ~/bin/
 rm -rf ./kubectx
 
+mkdir -p ~/.oh-my-zsh/completions
+chmod -R 755 ~/.oh-my-zsh/completions
+curl -fsSL https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubectx.zsh > ~/.oh-my-zsh/completions/_kubectx.zsh
+curl -fsSL https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubens.zsh > ~/.oh-my-zsh/completions/_kubens.zsh
+
 # Create SSH Keys
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 #eval "$(ssh-agent -s)"
