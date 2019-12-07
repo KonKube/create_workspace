@@ -1,10 +1,14 @@
 # Install Basic´s
 sudo apt-get update
-sudo apt-get install -y &&\
-  curl &&\
-  git &&\
-  terminator &&\
-  xclip &&\
+sudo apt-get install -y \
+  apt-transport-https \
+  ca-certificates \
+  curl \
+  git \
+  gnupg-agent \
+  software-properties-common \
+  terminator \
+  xclip \
   zsh
 
 # Install Google Chome Browser
@@ -19,6 +23,12 @@ sudo apt-get update
 sudo apt-get install atom
 sudo apt --fix-broken install
 sudo apt-get -f install
+
+# Install Visual Studio Code Editor
+curl -L -o visual_studio_code.deb https://go.microsoft.com/fwlink/?LinkID=760868
+sudo dpkg -i ./visual_studio_code.deb
+sudo apt --fix-broken install
+rm ./visual_studio_code.deb
 
 # Install Slack
 curl -LO https://downloads.slack-edge.com/linux_releases/slack-desktop-4.1.2-amd64.deb
@@ -85,6 +95,36 @@ mkdir -p ~/.oh-my-zsh/completions
 chmod -R 755 ~/.oh-my-zsh/completions
 curl -fsSL https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubectx.zsh > ~/.oh-my-zsh/completions/_kubectx.zsh
 curl -fsSL https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubens.zsh > ~/.oh-my-zsh/completions/_kubens.zsh
+
+# Install docker from 19.04 Disco Dingo package
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   disco \
+   stable"
+sudo apt-get update
+sudo apt-get install -y \
+  docker-ce \
+  docker-ce-cli \
+  containerd.io
+
+# Fixing Docker permissions
+sudo usermod -aG docker $USER
+
+# Install Docker Qemu User for building arm docker images.
+sudo apt install -y \
+  qemu \
+  qemu-user-static
+
+git clone https://github.com/computermouth/qemu-static-conf.git
+sudo cp qemu-static-conf/qemu-{aarch64,arm}-static.conf  /etc/binfmt.d
+sudo systemctl restart systemd-binfmt.service
+
+# creating own docker build environment
+docker buildx install
+docker buildx create --name konkube
+docker buildx use konkube
+docker buildx inspect --bootstrap
 
 # Create SSH Keys
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"

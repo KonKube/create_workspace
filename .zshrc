@@ -76,7 +76,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git github kubectl)
+plugins=(git github kubectl docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -110,3 +110,12 @@ alias ll="ls -rtla"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Load ssh-key with passphrase on start.
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+  eval `ssh-agent -s`
+  ssh-add
+fi
+
+# Export Docker Buildkit environment variable
+export DOCKER_CLI_EXPERIMENTAL=enabled
