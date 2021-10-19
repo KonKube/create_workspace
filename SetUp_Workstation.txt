@@ -1,0 +1,76 @@
+### Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+### Configure Homebrew
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/coder/.profile
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+### Install Homebrew dependencies
+brew install gcc
+
+### install xz
+brew install xz
+
+### Install zsh
+brew install zsh
+
+### Make zsh default shell
+chsh -s $(which zsh colorize)
+
+### Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+### Install Powerlevel10k
+brew install romkatv/powerlevel10k/powerlevel10k
+
+### Configure Powerlevel10k as default zsh theme.
+echo "source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme" >>~/.zshrc
+
+brew tap homebrew/cask-fonts
+brew install --cask font-hack-nerd-font
+
+### Add zsh syntax highlighting
+#git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+### Add zsh autosuggestions
+#git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+
+### Install Flash
+brew install flash
+
+### Install Kubectl
+brew install kubectl
+
+### Install FluxV2
+brew install fluxcd/tap/flux
+
+### Install Kubectx/Kubens
+brew install kubectx
+
+### Install Kail
+brew tap boz/repo
+brew install boz/repo/kail
+
+### Install PV
+brew install pv
+
+### Install Helm
+brew install helm
+
+### Install Watch
+brew install watch
+
+### Install KubeSeal
+brew install kubeseal
+
+### Install npm
+brew install npm
+
+### Install docker
+brew install --cask docker
+
+### Install VSC
+brew install --cask visual-studio-code
+
+### Install Keepassxc
+brew install --cask keepassxc
